@@ -1,0 +1,33 @@
+#!/bin/bash
+mkdir -p ~/.vim/autoload ~/.vim/bundle && \
+curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+
+echo "execute pathogen#infect()
+call pathogen#helptags() \" generate helptags for everything in ‘runtimepath’
+syntax on
+filetype plugin indent on
+
+\" Customized settings
+\" search and number
+set hlsearch
+set number
+\" use 4 spaces to instead of tab
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set expandtab
+set smarttab
+
+\" map customized short-cut to open NERDTree
+let mapleader = \" \"
+nmap <leader>t :NERDTreeToggle<CR>
+
+\" open nerdtree automatically when open vim with no file
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists(\"s:std_in\") | NERDTree | endif
+" > ~/.vimrc
+
+git clone https://github.com/scrooloose/nerdtree.git ~/.vim/bundle/nerdtree
+
+cur_dir=$(pwd)
+rm -f ${cur_dir}/nerdtree
